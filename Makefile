@@ -6,7 +6,7 @@
 #    By: guroux <guroux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 11:58:48 by guroux            #+#    #+#              #
-#    Updated: 2019/09/10 12:20:15 by guroux           ###   ########.fr        #
+#    Updated: 2019/09/10 13:36:25 by guroux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ KORED = $(YELLOW) $(RED)[error]$(WHITE)
 
 
 $(NAME): $(LIB) $(OBJECT)
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJECT) -L libft/ -lft && echo "$(BLUE)Compilation$(OKGREEN)" || (echo "$(BLUE)Compilation$(KORED)" && false)
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJECT) -L libft/ -lft -ltermcap && echo "$(BLUE)Compilation$(OKGREEN)" || (echo "$(BLUE)Compilation$(KORED)" && false)
 
 $(LIB):
 	@$(MAKE) -C $(LIB)
