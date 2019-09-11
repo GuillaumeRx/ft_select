@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select.h                                        :+:      :+:    :+:   */
+/*   select.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/11 22:14:08 by guroux           ###   ########.fr       */
+/*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
+/*   Updated: 2019/09/11 22:14:01 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#include "ft_select.h"
 
-#include "libft.h"
-# include <termcap.h>
-# include <termios.h>
-# include <signal.h>
+int		readterm()
+{
+	char	c;
+	int column_count;
+	int line_count;
 
-/*
-** term.c
-*/
+	column_count = tgetnum("co");
+	line_count = tgetnum("li");
+	while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
+	{
 
-int		init_term();
-
-/*
-** select.c
-*/
-
-int		readterm();
-
-#endif
+	}
+	return (1);
+}

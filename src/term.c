@@ -6,13 +6,13 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/10 13:26:51 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/11 20:25:29 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		init_termcap()
+static int		init_termcap()
 {
 	int		ret;
 	char	*term_typ;
@@ -34,6 +34,24 @@ int		init_termcap()
 		ft_putstr_fd(term_typ, STDERR_FILENO);
 		ft_putendl_fd("is not defined in Termcap database.", STDERR_FILENO);
 		return (0);
+	}
+	return (1);
+}
+
+int		init_term()
+{
+	struct termios s_termios;
+
+	if (init_termcap())
+	{
+		if (tcgetattr(0, &s_termios) == -1)
+			return (0);
+		s_termios.c_lflag &= ~(ICANON);
+		s_termios.c_lflag &= ~(ECHO);
+		s_termios.c_cc[VMIN] = 1;
+		s_termios.c_cc[VTIME] = 0;
+		if (tcsetattr(0, 0, &s_termios) == -1)
+			return (0);
 	}
 	return (1);
 }
