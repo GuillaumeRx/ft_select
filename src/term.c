@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/11 20:25:29 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/12 19:16:13 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		init_term()
 		if (tcsetattr(0, 0, &s_termios) == -1)
 			return (0);
 	}
+	tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
 	return (1);
 }

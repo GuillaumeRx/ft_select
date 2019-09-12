@@ -6,15 +6,15 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/11 18:26:38 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/12 19:10:29 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	if (init_term())
-		readterm();
+		readterm(ac, av);
 	return (0);
 }
