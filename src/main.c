@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/12 19:10:29 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/16 16:00:35 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int		main(int ac, char **av)
 {
+	t_select	*head;
+	
+	head = create_list(ac, av);
 	if (init_term())
-		readterm(ac, av);
+		readterm(head);
 	return (0);
 }

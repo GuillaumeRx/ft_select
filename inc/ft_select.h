@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/12 19:32:11 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/16 16:01:59 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,19 @@ int							init_term();
 ** select.c
 */
 
-int							readterm();
+int							readterm(t_select *head);
 
 /*
 ** tools.c
 */
 
 int							ft_putcher(int c);
-int							calc_longest(int ac, char **av);
+int							calc_longest(t_select *head);
+
+/*
+** list.c
+*/
+
+t_select					*create_list(int ac, char **av);
 
 #endif

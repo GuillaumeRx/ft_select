@@ -6,7 +6,7 @@
 #    By: guroux <guroux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 12:04:31 by guroux            #+#    #+#              #
-#    Updated: 2019/09/12 19:16:36 by guroux           ###   ########.fr        #
+#    Updated: 2019/09/16 16:22:14 by guroux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,3 +16,4 @@ SRC =	src/main.c \
 		src/term.c \
 		src/select.c \
 		src/tools.c \
+		src/list.c \
