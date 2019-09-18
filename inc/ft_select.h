@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/16 16:01:59 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/18 23:12:37 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include <termios.h>
 # include <signal.h>
 # include <sys/ioctl.h>
+# define CURSOR 1 << 0
+# define SELECTED 1 << 1
 
 typedef struct				s_select
 {
 		char				*str;
-		int					status;
+		char				status;
 		struct s_select		*next;
 }							t_select;
 
