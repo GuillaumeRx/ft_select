@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/18 23:17:44 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/22 23:31:06 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,33 @@ static void		print_word(const t_select *word, int len)
 {
 	get_status(word->status);
 	ft_putstr(word->str);
-	tputs(tgetstr("ue", NULL), STDOUT_FILENO, ft_putcher);
+	tputs(tgetstr("me", NULL), STDOUT_FILENO, ft_putcher);
 	printspaces(len - ft_strlen(word->str));
+}
+
+static int		handle_keypress(char buff[5], t_select *head)
+{
+	if (ft_strcmp(buff, tgetstr("kl", NULL)) == 0)
+	{
+		move_left(head);
+		return (1);
+	}
+	if (ft_strcmp(buff, tgetstr("kr", NULL)) == 0)
+	{
+		move_right(head);
+		return (1);
+	}
+	if (ft_strcmp(buff, " ") == 0)
+	{
+		handle_select(head);
+		return (1);
+	}
+	if (ft_strcmp(buff, "\e") == 0)
+	{
+		tputs(tgetstr("ve", NULL), STDOUT_FILENO, ft_putcher);
+		exit(1);
+	}
+	return (0);
 }
 
 static int		print_list(t_select *head, struct winsize ws)
@@ -69,13 +94,21 @@ static int		print_list(t_select *head, struct winsize ws)
 
 int				readterm(t_select *head)
 {
-	char	c;
+	char	buff[4 + 1];
+	int		ret;
 	struct winsize ws;
+	
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	print_list(head, ws);
-	while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
+	while ((ret = read(STDIN_FILENO, buff, 4)))
 	{
-		
+		buff[ret] = '\0';
+		if (handle_keypress(buff, head))
+		{
+			tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
+			print_list(head, ws);
+		}
+		ft_strclr(buff);
 	}
 	tputs(tgetstr("ve", NULL), STDOUT_FILENO, ft_putcher);
 	tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
