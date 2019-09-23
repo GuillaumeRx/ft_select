@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/22 23:31:06 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/23 12:32:42 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,26 @@ static void		print_word(const t_select *word, int len)
 	printspaces(len - ft_strlen(word->str));
 }
 
-static int		handle_keypress(char buff[5], t_select *head)
+static int		handle_keypress(char buff[5], t_select **head)
 {
 	if (ft_strcmp(buff, tgetstr("kl", NULL)) == 0)
 	{
-		move_left(head);
+		move_left(*head);
 		return (1);
 	}
 	if (ft_strcmp(buff, tgetstr("kr", NULL)) == 0)
 	{
-		move_right(head);
+		move_right(*head);
 		return (1);
 	}
 	if (ft_strcmp(buff, " ") == 0)
 	{
-		handle_select(head);
+		handle_select(*head);
+		return (1);
+	}
+	if ((buff[0] == 127 && buff[1] == 0) || ft_strcmp(buff, "\x1B[3~") == 0)
+	{
+		remove_node(head);
 		return (1);
 	}
 	if (ft_strcmp(buff, "\e") == 0)
@@ -92,21 +97,27 @@ static int		print_list(t_select *head, struct winsize ws)
 	return (1);
 }
 
-int				readterm(t_select *head)
+int				readterm(t_select **head)
 {
 	char	buff[4 + 1];
 	int		ret;
 	struct winsize ws;
 	
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	print_list(head, ws);
+	if (head && *head)
+		print_list(*head, ws);
 	while ((ret = read(STDIN_FILENO, buff, 4)))
 	{
 		buff[ret] = '\0';
 		if (handle_keypress(buff, head))
 		{
 			tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
-			print_list(head, ws);
+			if (head && *head)
+			{
+				print_list(*head, ws);
+			}
+			else
+				break;
 		}
 		ft_strclr(buff);
 	}

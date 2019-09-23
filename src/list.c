@@ -6,11 +6,49 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:28:27 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/22 23:48:11 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/23 12:27:11 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void		remove_node(t_select **head)
+{
+	t_select *prev;
+	t_select *act;
+	t_select *next;
+
+	act = *head;
+	next = (*head)->next;
+	while (act != NULL)
+	{
+		if (act->status & CURSOR)
+		{
+			if (act == *head)
+			{
+				move_right(*head);
+				*head = (*head)->next;
+				return;
+			}
+			else if (next == NULL)
+			{
+				move_right(*head);
+				prev->next = NULL;
+				return ;
+			}
+			else
+			{
+				move_right(*head);
+				prev->next = next;
+				return ;
+			}
+		}
+		prev = act;
+		act = act->next;
+		next = next->next;
+	}
+	return ;
+}
 
 void	handle_select(t_select *head)
 {

@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/22 23:28:58 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/23 12:24:38 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int							init_term();
 ** select.c
 */
 
-int							readterm(t_select *head);
+int							readterm(t_select **head);
 
 /*
 ** tools.c
@@ -55,5 +55,6 @@ t_select					*create_list(int ac, char **av);
 void						move_left(t_select *list);
 void						move_right(t_select *list);
 void						handle_select(t_select *head);
+void						remove_node(t_select **head);
 
 #endif
