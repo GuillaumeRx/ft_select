@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/23 12:32:42 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/25 18:49:58 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ static int		handle_keypress(char buff[5], t_select **head)
 	return (0);
 }
 
-static int		print_list(t_select *head, struct winsize ws)
+int		print_list(t_select *head)
 {
 	t_select	*tmp;
 	int			len;
 	int			arg_per_line;
 	int			i;
+	struct winsize ws;
 	
 	tmp = head;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	len = calc_longest(head);
 	arg_per_line = ws.ws_col / (len + 1);
 	i = 0;
@@ -101,11 +103,9 @@ int				readterm(t_select **head)
 {
 	char	buff[4 + 1];
 	int		ret;
-	struct winsize ws;
 	
-	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	if (head && *head)
-		print_list(*head, ws);
+		print_list(*head);
 	while ((ret = read(STDIN_FILENO, buff, 4)))
 	{
 		buff[ret] = '\0';
@@ -114,7 +114,7 @@ int				readterm(t_select **head)
 			tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
 			if (head && *head)
 			{
-				print_list(*head, ws);
+				print_list(*head);
 			}
 			else
 				break;

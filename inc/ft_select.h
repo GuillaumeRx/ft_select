@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/23 12:24:38 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/25 18:58:42 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct				s_select
 }							t_select;
 
 /*
+** main.c
+*/
+
+t_select 					**repeat_head(t_select **head);
+
+/*
 ** term.c
 */
 
@@ -39,6 +45,7 @@ int							init_term();
 */
 
 int							readterm(t_select **head);
+int							print_list(t_select *head);
 
 /*
 ** tools.c
@@ -56,5 +63,12 @@ void						move_left(t_select *list);
 void						move_right(t_select *list);
 void						handle_select(t_select *head);
 void						remove_node(t_select **head);
+
+/*
+** signal.c
+*/
+
+void						handle_signal(int sig);
+
 
 #endif
