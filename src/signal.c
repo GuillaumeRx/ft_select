@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 18:42:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 18:47:16 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/27 21:23:32 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		handle_signal(int sig)
 		signal(SIGWINCH, SIG_DFL);
 		signal(SIGTSTP, SIG_DFL);
 		reset_term(s_termios);
+		ioctl(2, TIOCSTI, "\x1A");
 	}
 	else if (sig == SIGINT)
 	{
@@ -38,5 +39,8 @@ void		handle_signal(int sig)
 		exit(1);
 	}
 	else if (sig == SIGCONT)
+	{
 		init_term(s_termios);
+		print_list(*head);
+	}
 }

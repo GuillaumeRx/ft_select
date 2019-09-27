@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 18:43:02 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/27 21:22:55 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ int		init_term(struct termios s_termios)
 	tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
 	tputs(tgetstr("vi", NULL), STDOUT_FILENO, ft_putcher);
 	tputs(tgetstr("ks", NULL), STDOUT_FILENO, ft_putcher);
+	signal(SIGWINCH, handle_signal);
+	signal(SIGCONT, handle_signal);
+	signal(SIGTSTP, handle_signal);
+	signal(SIGINT, handle_signal);
 	return (1);
 }
 

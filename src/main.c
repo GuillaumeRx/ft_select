@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 18:40:53 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/27 21:22:43 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ int		main(int ac, char **av)
 	{
 		repeat_head(&head);
 		repeat_termios(&s_termios);
-		signal(SIGWINCH, handle_signal);
-		signal(SIGCONT, handle_signal);
-		signal(SIGTSTP, handle_signal);
-		signal(SIGINT, handle_signal);
 		if (init_term(s_termios))
 		{
 			if (readterm(&head))
