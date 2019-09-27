@@ -6,7 +6,7 @@
 #    By: guroux <guroux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 12:04:31 by guroux            #+#    #+#              #
-#    Updated: 2019/09/25 18:43:02 by guroux           ###   ########.fr        #
+#    Updated: 2019/09/27 16:25:03 by guroux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,3 +18,5 @@ SRC =	src/main.c \
 		src/tools.c \
 		src/list.c \
 		src/signal.c \
+		src/move.c \
+		src/print.c \

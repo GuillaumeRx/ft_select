@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/25 18:58:42 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/27 18:54:57 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,20 @@ typedef struct				s_select
 */
 
 t_select 					**repeat_head(t_select **head);
+struct termios				repeat_termios(struct termios *s_termios);
 
 /*
 ** term.c
 */
 
-int							init_term();
+int							init_term(struct termios s_termios);
+int							reset_term(struct termios s_termios);
 
 /*
 ** select.c
 */
 
 int							readterm(t_select **head);
-int							print_list(t_select *head);
 
 /*
 ** tools.c
@@ -53,22 +54,34 @@ int							print_list(t_select *head);
 
 int							ft_putcher(int c);
 int							calc_longest(t_select *head);
+int							args_number(t_select *head);
+
+/*
+** move.c
+*/
+
+void						move_left(t_select *list);
+void						move_right(t_select *list);
+void						handle_select(t_select *head);
+
+/*
+** print.c
+*/
+
+int							print_list(t_select *head);
 
 /*
 ** list.c
 */
 
 t_select					*create_list(int ac, char **av);
-void						move_left(t_select *list);
-void						move_right(t_select *list);
-void						handle_select(t_select *head);
 void						remove_node(t_select **head);
+void						del_list(t_select *node);
 
 /*
 ** signal.c
 */
 
 void						handle_signal(int sig);
-
 
 #endif

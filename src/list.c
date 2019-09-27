@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:28:27 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/25 18:58:57 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/27 17:27:04 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,93 +36,15 @@ void		remove_node(t_select **head)
 				prev->next = NULL;
 				return ;
 			}
-			else
-			{
-				move_right(*head);
-				prev->next = next;
-				return ;
-			}
+			move_right(*head);
+			prev->next = next;
+			return ;
 		}
 		prev = act;
 		act = act->next;
 		next = next->next;
 	}
 	return ;
-}
-
-void	handle_select(t_select *head)
-{
-	t_select *tmp;
-	
-	tmp = head;
-	while (tmp != NULL)
-	{
-		if (tmp->status & CURSOR)
-		{
-			if (tmp->status & SELECTED)
-				tmp->status = tmp->status ^ SELECTED;
-			else
-				tmp->status = tmp->status | SELECTED;
-		}
-		tmp = tmp->next;
-	}
-}
-
-void	move_right(t_select *list)
-{
-	t_select *tmp;
-
-	tmp = list;
-	while (tmp != NULL)
-	{
-		if (tmp->status & CURSOR)
-		{
-			if (tmp->next)
-			{
-				tmp->status = tmp->status ^ CURSOR;
-				tmp->next->status = tmp->next->status | CURSOR;
-			}
-			else
-			{
-				tmp->status = tmp->status ^ CURSOR;
-				list->status = list->status | CURSOR;
-			}
-			return;
-		}
-		tmp = tmp->next;
-	}
-}
-
-void	move_left(t_select *list)
-{
-	t_select *prev;
-	t_select *next;
-
-	prev = list;
-	next = list->next;
-	if (prev->status & CURSOR)
-	{
-		prev->status = prev->status ^ CURSOR;
-		while (prev->next != NULL)
-			prev = prev->next;
-		prev->status = prev->status | CURSOR;
-
-	}
-	else
-	{
-		while (prev->next != NULL)
-		{
-			if (next->status & CURSOR)
-			{
-				next->status = next->status ^ CURSOR;
-				prev->status = prev->status | CURSOR;
-				return;
-			}
-			prev = prev->next;
-			next = next->next;
-		}
-
-	}
 }
 
 void	add_node(t_select **lst, t_select *new)
@@ -150,6 +72,7 @@ t_select	*create_list(int ac, char **av)
 	t_select	*tmp;
 	
 	i = ac - 1;
+	head = NULL;
 	while (i != 0)
 	{
 		if (i == ac - 1)
@@ -164,4 +87,15 @@ t_select	*create_list(int ac, char **av)
 		--i;
 	}
 	return (head);
+}
+
+void		del_list(t_select *node)
+{
+	if (node)
+	{
+		ft_strdel(&(node->str));
+		del_list(node->next);
+		free(node);
+		node = NULL;
+	}
 }
