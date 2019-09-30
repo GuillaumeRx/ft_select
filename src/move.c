@@ -6,11 +6,12 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:49 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 15:55:04 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 22:05:10 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
 
 void	handle_select(t_select *head)
 {
@@ -25,6 +26,50 @@ void	handle_select(t_select *head)
 				tmp->status = tmp->status ^ SELECTED;
 			else
 				tmp->status = tmp->status | SELECTED;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	move_down(t_select *list, int arg_per_line)
+{
+	t_select	*tmp;
+
+	tmp = list;
+	while (tmp != NULL)
+	{
+		if (tmp->status & CURSOR)
+		{
+			tmp->status ^= CURSOR;
+			while (arg_per_line != 0 && tmp->next != NULL)
+			{
+				--arg_per_line;
+				tmp = tmp->next;
+			}
+			tmp->status |= CURSOR;
+			return ;		
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	move_up(t_select *list, int arg_per_line)
+{
+	t_select	*tmp;
+
+	tmp = list;
+	while (tmp != NULL)
+	{
+		if (tmp->status & CURSOR)
+		{
+			tmp->status ^= CURSOR;
+			while (arg_per_line != 0 && tmp->prev != NULL)
+			{
+				--arg_per_line;
+				tmp = tmp->prev;
+			}
+			tmp->status |= CURSOR;
+			return ;		
 		}
 		tmp = tmp->next;
 	}
@@ -57,32 +102,26 @@ void	move_right(t_select *list)
 
 void	move_left(t_select *list)
 {
-	t_select *prev;
-	t_select *next;
+	t_select *tmp;
 
-	prev = list;
-	next = list->next;
-	if (prev->status & CURSOR)
+	tmp = list;
+	if (tmp->status & CURSOR)
 	{
-		prev->status = prev->status ^ CURSOR;
-		while (prev->next != NULL)
-			prev = prev->next;
-		prev->status = prev->status | CURSOR;
-
+		tmp->status ^= CURSOR;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->status |= CURSOR;
+		return ;
+		
 	}
-	else
+	while (tmp != NULL)
 	{
-		while (prev->next != NULL)
+		if (tmp->status & CURSOR)
 		{
-			if (next->status & CURSOR)
-			{
-				next->status = next->status ^ CURSOR;
-				prev->status = prev->status | CURSOR;
-				return;
-			}
-			prev = prev->next;
-			next = next->next;
+			tmp->prev->status |= CURSOR;
+			tmp->status ^= CURSOR;
+			return ;
 		}
-
+		tmp = tmp->next;
 	}
 }

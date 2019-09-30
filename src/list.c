@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:28:27 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 17:27:04 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 21:33:23 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		remove_node(t_select **head)
 void	add_node(t_select **lst, t_select *new)
 {
 	new->next = *lst;
+	(*lst)->prev = new;
+	new->prev = NULL;
 	*lst = new;
 }
 

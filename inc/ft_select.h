@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 18:54:57 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 21:51:01 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct				s_select
 		char				*str;
 		char				status;
 		struct s_select		*next;
+		struct s_select		*prev;
 }							t_select;
 
 /*
@@ -63,12 +64,15 @@ int							args_number(t_select *head);
 void						move_left(t_select *list);
 void						move_right(t_select *list);
 void						handle_select(t_select *head);
+void						move_down(t_select *list, int arg_per_line);
+void						move_up(t_select *list, int arg_per_line);
 
 /*
 ** print.c
 */
 
 int							print_list(t_select *head);
+int							verify_size(int arg_per_line, int args, struct winsize ws);
 
 /*
 ** list.c

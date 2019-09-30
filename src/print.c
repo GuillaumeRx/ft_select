@@ -6,13 +6,13 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:21:58 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 19:03:18 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 12:56:49 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int			verify_size(int arg_per_line, int args, struct winsize ws)
+int			verify_size(int arg_per_line, int args, struct winsize ws)
 {
 		if ((args / arg_per_line) >= ws.ws_row)
 			return (0);
