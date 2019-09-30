@@ -6,11 +6,24 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 21:22:55 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 22:33:27 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void			switch_screen(int action)
+{
+	char *term;
+	
+	if ((term = getenv("TERM")) != NULL && ft_strcmp(term, "xterm-256color") == 0)
+	{
+		if (action)
+			ft_putstr_fd("\033[?1049h\033[H", 2);
+		else
+			ft_putstr_fd("\033[?1049l", 2);
+	}
+}
 
 static int		init_termcap()
 {
@@ -56,15 +69,17 @@ int		init_term(struct termios s_termios)
 		s_termios.c_cc[VTIME] = 0;
 		if (tcsetattr(0, TCSAFLUSH, &s_termios) == -1)
 			return (0);
+		tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
+		tputs(tgetstr("vi", NULL), STDOUT_FILENO, ft_putcher);
+		tputs(tgetstr("ks", NULL), STDOUT_FILENO, ft_putcher);
+		signal(SIGWINCH, handle_signal);
+		signal(SIGCONT, handle_signal);
+		signal(SIGTSTP, handle_signal);
+		signal(SIGINT, handle_signal);
+		signal(SIGQUIT, handle_signal);
+		return (1);
 	}
-	tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
-	tputs(tgetstr("vi", NULL), STDOUT_FILENO, ft_putcher);
-	tputs(tgetstr("ks", NULL), STDOUT_FILENO, ft_putcher);
-	signal(SIGWINCH, handle_signal);
-	signal(SIGCONT, handle_signal);
-	signal(SIGTSTP, handle_signal);
-	signal(SIGINT, handle_signal);
-	return (1);
+	return (0);	
 }
 
 int		reset_term(struct termios s_termios)

@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 21:51:01 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 22:22:02 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct termios				repeat_termios(struct termios *s_termios);
 
 int							init_term(struct termios s_termios);
 int							reset_term(struct termios s_termios);
+void						switch_screen(int action);
 
 /*
 ** select.c

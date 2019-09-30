@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 21:22:43 by guroux           ###   ########.fr       */
+/*   Updated: 2019/09/30 22:24:13 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		main(int ac, char **av)
 	t_select	*head;
 	struct termios s_termios;
 	
+	switch_screen(1);
 	if (tcgetattr(0, &s_termios) == -1)
 			return (0);
 	if ((head = create_list(ac, av)))
@@ -77,5 +78,6 @@ int		main(int ac, char **av)
 		del_list(head);
 	}
 	reset_term(s_termios);
+	switch_screen(0);
 	return (0);
 }
