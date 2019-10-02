@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 22:24:13 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 16:19:19 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int		main(int ac, char **av)
 	t_select	*head;
 	struct termios s_termios;
 	
+	if (ac < 2)
+	{
+		ft_putendl_fd("usage: ft_select [arg1] [arg2] [...]", 2);
+		return (0);
+	}
 	switch_screen(1);
 	if (tcgetattr(0, &s_termios) == -1)
 			return (0);
@@ -72,8 +77,12 @@ int		main(int ac, char **av)
 		repeat_termios(&s_termios);
 		if (init_term(s_termios))
 		{
+			signal(SIGWINCH, handle_signal);			
 			if (readterm(&head))
+			{
+				clear_term();
 				print_result(head);
+			}
 		}
 		del_list(head);
 	}

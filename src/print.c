@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:21:58 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 12:56:49 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:24:07 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static void		get_status(char status)
 	char *underline = tgetstr("us", NULL);
 	
 	if (status & CURSOR)
-		tputs(underline, STDOUT_FILENO, ft_putcher);
+		tputs(underline, 2, ft_putcher);
 	if (status & SELECTED)
-		tputs(reversed, STDOUT_FILENO, ft_putcher);
+		tputs(reversed, 2, ft_putcher);
 }
 
 static void		printspaces(int len)
 {
 	while (len != 0)
 	{
-		ft_putchar(' ');
+		ft_putchar_fd(' ', 2);
 		--len;
 	}
 }
@@ -42,8 +42,8 @@ static void		printspaces(int len)
 static void		print_word(const t_select *word, int len)
 {
 	get_status(word->status);
-	ft_putstr(word->str);
-	tputs(tgetstr("me", NULL), STDOUT_FILENO, ft_putcher);
+	ft_putstr_fd(word->str, 2);
+	tputs(tgetstr("me", NULL), 2, ft_putcher);
 	printspaces(len - ft_strlen(word->str));
 }
 
@@ -68,11 +68,11 @@ int		print_list(t_select *head)
 			++i;
 			if (i == arg_per_line)
 			{
-				ft_putchar('\n');
+				ft_putchar_fd('\n', 2);
 				i = 0;
 			}
 			else if (tmp->next != NULL)
-				ft_putchar(' ');
+				ft_putchar_fd(' ', 2);
 			tmp = tmp->next;
 		}
 	}

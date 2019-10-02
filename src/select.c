@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 21:50:37 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				readterm(t_select **head)
 		ret = 0;
 		if ((ret = handle_keypress(buff, head)) == 1)
 		{
-			tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
+			tputs(tgetstr("cl", NULL), 2, ft_putcher);
 			if (head && *head)
 			{
 				print_list(*head);

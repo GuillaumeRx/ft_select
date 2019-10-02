@@ -6,15 +6,20 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:14:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/27 18:54:53 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:22:23 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
+void	clear_term(void)
+{
+	tputs(tgetstr("cl", NULL), 2, ft_putcher);
+}
+
 int		ft_putcher(int c)
 {
-	return (write(STDOUT_FILENO, &c, 1));
+	return (write(2, &c, 1));
 }
 
 int		calc_longest(t_select *head)

@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 18:42:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 22:26:35 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		handle_signal(int sig)
 	s_termios = repeat_termios(NULL);
 	if (sig == SIGWINCH)
 	{
-		tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
+		tputs(tgetstr("cl", NULL), 2, ft_putcher);
 		print_list(*head);
 	}
 	else if (sig == SIGTSTP)

@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 22:22:02 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 16:03:46 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int							readterm(t_select **head);
 int							ft_putcher(int c);
 int							calc_longest(t_select *head);
 int							args_number(t_select *head);
+void						clear_term(void);
 
 /*
 ** move.c

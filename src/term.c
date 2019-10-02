@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 22:33:27 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ static int		init_termcap()
 
 int		init_term(struct termios s_termios)
 {
-	
+	signal(SIGCONT, handle_signal);
+	signal(SIGTSTP, handle_signal);
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, handle_signal);
 	if (init_termcap())
 	{
 		s_termios.c_lflag &= ~(ICANON);
@@ -69,14 +72,8 @@ int		init_term(struct termios s_termios)
 		s_termios.c_cc[VTIME] = 0;
 		if (tcsetattr(0, TCSAFLUSH, &s_termios) == -1)
 			return (0);
-		tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
-		tputs(tgetstr("vi", NULL), STDOUT_FILENO, ft_putcher);
-		tputs(tgetstr("ks", NULL), STDOUT_FILENO, ft_putcher);
-		signal(SIGWINCH, handle_signal);
-		signal(SIGCONT, handle_signal);
-		signal(SIGTSTP, handle_signal);
-		signal(SIGINT, handle_signal);
-		signal(SIGQUIT, handle_signal);
+		tputs(tgetstr("vi", NULL), 2, ft_putcher);
+		tputs(tgetstr("ks", NULL), 2, ft_putcher);
 		return (1);
 	}
 	return (0);	
@@ -84,9 +81,8 @@ int		init_term(struct termios s_termios)
 
 int		reset_term(struct termios s_termios)
 {
-	tputs(tgetstr("ve", NULL), STDOUT_FILENO, ft_putcher);
-	tputs(tgetstr("cl", NULL), STDOUT_FILENO, ft_putcher);
 	if (tcsetattr(0, TCSAFLUSH, &s_termios) == -1)
 			return (0);
+	tputs(tgetstr("ve", NULL), 2, ft_putcher);
 	return (1);
 }
