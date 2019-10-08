@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:30:38 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:42:29 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct				s_select
 ** main.c
 */
 
-t_select 					**repeat_head(t_select **head);
+t_select					**repeat_head(t_select **head);
 struct termios				repeat_termios(struct termios *s_termios);
 
 /*
@@ -58,6 +58,7 @@ int							ft_putcher(int c);
 int							calc_longest(t_select *head);
 int							args_number(t_select *head);
 void						clear_term(void);
+void						free_node(t_select *node);
 
 /*
 ** move.c
