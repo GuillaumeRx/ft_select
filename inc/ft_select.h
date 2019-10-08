@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:42:29 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:57:41 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void						move_up(t_select *list, int arg_per_line);
 ** print.c
 */
 
-int							print_list(t_select *head);
+int							handle_print(t_select *head);
 int							verify_size(int arg_per_line, int args,
 struct winsize ws);
 

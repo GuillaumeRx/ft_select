@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:57:41 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				readterm(t_select **head)
 	int		ret;
 	
 	if (head && *head)
-		print_list(*head);
+		handle_print(*head);
 	while ((ret = read(STDIN_FILENO, buff, 4)))
 	{
 		buff[ret] = '\0';
@@ -79,7 +79,7 @@ int				readterm(t_select **head)
 			tputs(tgetstr("cl", NULL), 2, ft_putcher);
 			if (head && *head)
 			{
-				print_list(*head);
+				handle_print(*head);
 			}
 			else
 				break;

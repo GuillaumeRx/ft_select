@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 18:42:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:57:41 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		handle_signal(int sig)
 	if (sig == SIGWINCH)
 	{
 		tputs(tgetstr("cl", NULL), 2, ft_putcher);
-		print_list(*head);
+		handle_print(*head);
 	}
 	else if (sig == SIGTSTP)
 	{
@@ -47,6 +47,6 @@ void		handle_signal(int sig)
 	{
 		switch_screen(1);
 		init_term(s_termios);
-		print_list(*head);
+		handle_print(*head);
 	}
 }
