@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:55:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/02 17:23:40 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:10:36 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static int		init_termcap()
 
 int		init_term(struct termios s_termios)
 {
-	signal(SIGCONT, handle_signal);
+	signal(SIGCONT, handle_signal_2);
 	signal(SIGTSTP, handle_signal);
-	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, handle_signal);
+	signal(SIGINT, handle_signal_2);
+	signal(SIGQUIT, handle_signal_2);
 	if (init_termcap())
 	{
 		s_termios.c_lflag &= ~(ICANON);

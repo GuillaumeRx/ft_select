@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 18:42:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:57:41 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:10:16 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@ void		handle_signal(int sig)
 		ioctl(2, TIOCSTI, "\x1A");
 		switch_screen(0);
 	}
-	else if (sig == SIGINT || sig == SIGQUIT)
+}
+
+void		handle_signal_2(int sig)
+{
+	t_select		**head;
+	struct termios	s_termios;
+
+	head = repeat_head(NULL);
+	s_termios = repeat_termios(NULL);
+	if (sig == SIGINT || sig == SIGQUIT)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGWINCH, SIG_DFL);

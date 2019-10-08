@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:51:17 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:57:41 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:10:55 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void						del_list(t_select *node);
 */
 
 void						handle_signal(int sig);
+void						handle_signal_2(int sig);
 
 #endif
