@@ -6,39 +6,71 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 18:24:41 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:46:49 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
+static int		handle_keypress_move(char buff[5], t_select **head, int col)
+{
+	if (ft_strcmp(buff, tgetstr("kl", NULL)) == 0)
+	{
+		move_left(*head);
+		return (1);
+	}
+	else if (ft_strcmp(buff, tgetstr("kr", NULL)) == 0)
+	{
+		move_right(*head);
+		return (1);
+	}
+	else if (ft_strcmp(buff, tgetstr("kd", NULL)) == 0)
+	{
+		move_down(*head, col);
+		return (1);
+	}
+	else if (ft_strcmp(buff, tgetstr("ku", NULL)) == 0)
+	{
+		move_up(*head, col);
+		return (1);
+	}
+	return (0);
+}
+
+static int		handle_keypress_spec(char buff[5], t_select **head)
+{
+	if (ft_strcmp(buff, " ") == 0)
+	{
+		handle_select(*head);
+		return (1);
+	}
+	else if ((buff[0] == 127 && buff[1] == 0)
+	|| ft_strcmp(buff, "\x1B[3~") == 0)
+	{
+		remove_node(head);
+		return (1);
+	}
+	else if (ft_strcmp("\n", buff) == 0)
+		return (42);
+	else if (ft_strcmp(buff, "\e") == 0)
+		return (-1);
+	return (0);
+}
+
 static int		handle_keypress(char buff[5], t_select **head)
 {
 	int					len;
 	struct winsize		ws;
+	int					ret;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	len = calc_longest(*head);
 	if (verify_size(ws.ws_col / (len + 1), args_number(*head), ws))
 	{
-		if (ft_strcmp(buff, tgetstr("kl", NULL)) == 0)
-			move_left(*head);
-		else if (ft_strcmp(buff, tgetstr("kr", NULL)) == 0)
-			move_right(*head);
-		else if (ft_strcmp(buff, tgetstr("kd", NULL)) == 0)
-			move_down(*head, ws.ws_col / (len + 1));
-		else if (ft_strcmp(buff, tgetstr("ku", NULL)) == 0)
-			move_up(*head, ws.ws_col / (len + 1));
-		else if (ft_strcmp(buff, " ") == 0)
-			handle_select(*head);
-		else if ((buff[0] == 127 && buff[1] == 0)
-		|| ft_strcmp(buff, "\x1B[3~") == 0)
-			remove_node(head);
-		else if (ft_strcmp("\n", buff) == 0)
-			return (42);
-		else if (ft_strcmp(buff, "\e") == 0)
-			return (-1);
-		return (1);
+		if (handle_keypress_move(buff, head, ws.ws_col / (len + 1)))
+			return (1);
+		if ((ret = handle_keypress_spec(buff, head)))
+			return (ret);
 	}
 	return (0);
 }
