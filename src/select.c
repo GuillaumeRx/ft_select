@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 18:07:54 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:24:41 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int		handle_keypress(char buff[5], t_select **head)
 		else if ((buff[0] == 127 && buff[1] == 0)
 		|| ft_strcmp(buff, "\x1B[3~") == 0)
 			remove_node(head);
+		else if (ft_strcmp("\n", buff) == 0)
+			return (42);
 		else if (ft_strcmp(buff, "\e") == 0)
 			return (-1);
 		return (1);
@@ -62,7 +64,7 @@ int				readterm(t_select **head)
 		}
 		else if (ret == -1)
 			return (0);
-		else if (ft_strcmp("\n", buff) == 0)
+		else if (ret == 42)
 			return (1);
 		ft_strclr(buff);
 	}
