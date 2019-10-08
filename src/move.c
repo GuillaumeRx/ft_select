@@ -6,17 +6,16 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 15:54:49 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 22:05:10 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:50:55 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-
 void	handle_select(t_select *head)
 {
 	t_select *tmp;
-	
+
 	tmp = head;
 	while (tmp != NULL)
 	{
@@ -47,7 +46,7 @@ void	move_down(t_select *list, int arg_per_line)
 				tmp = tmp->next;
 			}
 			tmp->status |= CURSOR;
-			return ;		
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -69,7 +68,7 @@ void	move_up(t_select *list, int arg_per_line)
 				tmp = tmp->prev;
 			}
 			tmp->status |= CURSOR;
-			return ;		
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -94,7 +93,7 @@ void	move_right(t_select *list)
 				tmp->status = tmp->status ^ CURSOR;
 				list->status = list->status | CURSOR;
 			}
-			return;
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -112,7 +111,6 @@ void	move_left(t_select *list)
 			tmp = tmp->next;
 		tmp->status |= CURSOR;
 		return ;
-		
 	}
 	while (tmp != NULL)
 	{
