@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:14:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 18:26:31 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 19:02:03 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	free_node(t_select *node)
 {
-	node->prev->next = node->next;
-	node->next->prev = node->prev;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
 	ft_strdel(&(node->str));
 	free(node);
 	node = NULL;
