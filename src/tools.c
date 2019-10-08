@@ -6,13 +6,13 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:14:45 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:40:57 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 18:26:31 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		free_node(t_select *node)
+void	free_node(t_select *node)
 {
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
@@ -35,7 +35,7 @@ int		calc_longest(t_select *head)
 {
 	t_select	*tmp;
 	size_t		len;
-	
+
 	tmp = head;
 	len = 0;
 	while (tmp != NULL)
