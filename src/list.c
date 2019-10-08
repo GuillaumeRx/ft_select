@@ -6,20 +6,26 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:28:27 by guroux            #+#    #+#             */
-/*   Updated: 2019/09/30 21:33:23 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:36:43 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
+void		free_node(t_select *node)
+{
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+	ft_strdel(&(node->str));
+	free(node);
+	node = NULL;
+}
+
 void		remove_node(t_select **head)
 {
-	t_select *prev;
 	t_select *act;
-	t_select *next;
 
 	act = *head;
-	next = (*head)->next;
 	while (act != NULL)
 	{
 		if (act->status & CURSOR)
@@ -27,22 +33,19 @@ void		remove_node(t_select **head)
 			if (act == *head)
 			{
 				move_right(*head);
+				ft_strdel(&((*head)->str));
+				free(act);
 				*head = (*head)->next;
 				return;
 			}
-			else if (next == NULL)
+			else
 			{
 				move_right(*head);
-				prev->next = NULL;
+				free_node(act);
 				return ;
 			}
-			move_right(*head);
-			prev->next = next;
-			return ;
 		}
-		prev = act;
 		act = act->next;
-		next = next->next;
 	}
 	return ;
 }

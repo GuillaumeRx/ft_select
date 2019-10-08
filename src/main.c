@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/02 16:19:19 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/08 17:29:07 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_select **repeat_head(t_select **head)
 {
-	static t_select **mem = NULL;
-	
+	static t_select **mem;
+
 	if (head == NULL)
 		return (mem);
 	else
