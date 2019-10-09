@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 18:46:49 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/09 02:10:24 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ static int		handle_keypress_spec(char buff[5], t_select **head)
 		remove_node(head);
 		return (1);
 	}
-	else if (ft_strcmp("\n", buff) == 0)
-		return (42);
-	else if (ft_strcmp(buff, "\e") == 0)
-		return (-1);
 	return (0);
 }
 
@@ -61,17 +57,19 @@ static int		handle_keypress(char buff[5], t_select **head)
 {
 	int					len;
 	struct winsize		ws;
-	int					ret;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	len = calc_longest(*head);
-	if (verify_size(ws.ws_col / (len + 1), args_number(*head), ws))
+	if (len < ws.ws_col && verify_size(ws.ws_col / (len + 1), args_number(*head), ws))
 	{
-		if (handle_keypress_move(buff, head, ws.ws_col / (len + 1)))
+		if (handle_keypress_move(buff, head, ws.ws_col / (len + 1))
+		|| handle_keypress_spec(buff, head))
 			return (1);
-		if ((ret = handle_keypress_spec(buff, head)))
-			return (ret);
 	}
+	if (ft_strcmp("\n", buff) == 0)
+		return (42);
+	else if (ft_strcmp(buff, "\e") == 0)
+		return (-1);
 	return (0);
 }
 

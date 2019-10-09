@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 19:04:25 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/09 02:06:19 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,12 @@ static void			loop(int ac, char **av, struct termios s_termios)
 			if (readterm(&head))
 			{
 				clear_term();
+				switch_screen(0);
 				print_result(head);
 			}
+			else
+				switch_screen(0);
+			
 		}
 		del_list(head);
 	}
@@ -93,6 +97,5 @@ int					main(int ac, char **av)
 		return (0);
 	loop(ac, av, s_termios);
 	reset_term(s_termios);
-	switch_screen(0);
 	return (0);
 }

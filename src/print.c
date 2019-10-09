@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:21:58 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 18:02:34 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/09 02:03:23 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				handle_print(t_select *head)
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	len = calc_longest(head);
 	arg_per_line = ws.ws_col / (len + 1);
-	if (verify_size(arg_per_line, args_number(head), ws))
+	if (len < ws.ws_col && verify_size(arg_per_line, args_number(head), ws))
 		print_list(head, len, arg_per_line);
 	else
 		ft_putendl_fd("The window is too small", STDERR_FILENO);

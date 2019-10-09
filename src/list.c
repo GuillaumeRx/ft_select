@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 19:28:27 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/08 17:43:30 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/09 02:04:48 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,13 @@ t_select		*create_list(int ac, char **av)
 	head = NULL;
 	while (i != 0)
 	{
+		tmp = new_node(av[i]);
+		if (i == 1)
+			tmp->status |= CURSOR;
 		if (i == ac - 1)
-			head = new_node(av[i]);
+			head = tmp;
 		else
-		{
-			tmp = new_node(av[i]);
-			if (i == 1)
-				tmp->status = tmp->status | CURSOR;
 			add_node(&head, tmp);
-		}
 		--i;
 	}
 	return (head);
