@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 17:16:09 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/09 02:10:24 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/25 20:01:24 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static int		handle_keypress(char buff[5], t_select **head)
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	len = calc_longest(*head);
-	if (len < ws.ws_col && verify_size(ws.ws_col / (len + 1), args_number(*head), ws))
+	if (len < ws.ws_col &&
+	verify_size(ws.ws_col / (len + 1), args_number(*head), ws))
 	{
 		if (handle_keypress_move(buff, head, ws.ws_col / (len + 1))
 		|| handle_keypress_spec(buff, head))

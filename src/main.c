@@ -6,7 +6,7 @@
 /*   By: guroux <guroux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 12:07:44 by guroux            #+#    #+#             */
-/*   Updated: 2019/10/09 02:06:19 by guroux           ###   ########.fr       */
+/*   Updated: 2019/10/25 19:59:21 by guroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void			loop(int ac, char **av, struct termios s_termios)
 			}
 			else
 				switch_screen(0);
-			
 		}
 		del_list(head);
 	}
